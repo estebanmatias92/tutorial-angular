@@ -1,0 +1,72 @@
+data:
+  image: debian
+  volumes:
+    - .:/var/www:rw
+
+server:
+  image: node
+  volumes_from:
+    - data
+  working_dir: /var/www
+  ports:
+    - "3000:3000"
+  entrypoint:
+    - npm
+  command: start
+
+node:
+  image: node
+  volumes_from:
+    - data
+  working_dir: /var/www
+  command:
+    - node
+    - --version
+
+npm:
+  image: node
+  volumes_from:
+    - data
+  working_dir: /var/www
+  entrypoint:
+    - npm
+  command: --version
+
+express:
+  image: node
+  volumes_from:
+    - data
+  working_dir: /var/www
+  entrypoint:
+    - ./node_modules/express-generator/bin/express
+  command: --version
+
+yo:
+  image: estebanmatias92/yeoman
+  volumes_from:
+    - data
+  working_dir: /var/www
+  privileged: true
+  entrypoint:
+    - yo
+  command:
+    - --version
+
+bower:
+  image: node
+  volumes_from:
+    - data
+  working_dir: /var/www
+  entrypoint:
+    - ./node_modules/bower/bin/bower
+    - --allow-root
+  command:
+    - --version
+
+grunt:
+  image: node
+  volumes_from:
+    - data
+  working_dir: /var/www
+  entrypoint:
+    - ./node_modules/grunt-cli/bin/grunt

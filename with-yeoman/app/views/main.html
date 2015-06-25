@@ -1,0 +1,28 @@
+<h2>Tareas</h2>
+
+<form role="form" ng-submit="addTask()">
+    <div class="row">
+        <div class="input-group">
+            <input type="text" class="form-control" ng-model="task" placeholder="Tarea a realizar..." />
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </span>
+        </div>
+    </div>
+</form>
+
+<br />
+
+<div ui-sortable="sortableOptions" ng-model="tasks">
+    <p class="input-group task" ng-repeat="task in tasks">
+        <input type="text" class="form-control task-content" ng-model="task"/>
+
+        <span class="input-group-btn">
+            <button class="btn btn-danger" ng-click="removeTask($index)" aria-label="Eliminar">
+                <span class="glyphicon glyphicon-trash"></span>
+            </button>
+        </span>
+    </p>
+</div>

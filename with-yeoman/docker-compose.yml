@@ -1,0 +1,81 @@
+data:
+  image: debian
+  volumes:
+    - .:/var/www:rw
+
+server:
+  image: node
+  volumes_from:
+    - data
+  working_dir: /var/www
+  ports:
+    - "9000:9000"
+    - "35729:35729"
+  command:
+    - ./node_modules/grunt-cli/bin/grunt
+    - serve
+
+node:
+  image: node
+  volumes_from:
+    - data
+  working_dir: /var/www
+  command:
+    - node
+    - --version
+
+npm:
+  image: node
+  volumes_from:
+    - data
+  working_dir: /var/www
+  entrypoint:
+    - npm
+  command: --version
+
+express:
+  image: node
+  volumes_from:
+    - data
+  working_dir: /var/www
+  entrypoint:
+    - ./node_modules/express-generator/bin/express
+  command: --version
+
+yo:
+  image: estebanmatias92/yeoman
+  volumes_from:
+    - data
+  working_dir: /var/www
+  entrypoint:
+    - yo
+  command:
+    - --version
+
+bower:
+  image: node
+  volumes_from:
+    - data
+  working_dir: /var/www
+  entrypoint:
+    - ./node_modules/bower/bin/bower
+    - --allow-root
+  command:
+    - --version
+
+grunt:
+  image: node
+  volumes_from:
+    - data
+  working_dir: /var/www
+  entrypoint:
+    - ./node_modules/grunt-cli/bin/grunt
+
+test:
+  image: node
+  volumes_from:
+    - data
+  working_dir: /var/www
+  command:
+    - ./node_modules/grunt-cli/bin/grunt
+    - test

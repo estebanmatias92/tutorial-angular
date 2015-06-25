@@ -1,0 +1,30 @@
+<!doctype html>
+<html ng-app="tutorial">
+	<head>
+		<meta charset="utf-8">
+		<title>Curso angularjs</title>
+		<link rel="stylesheet" type="text/css" href="./style.css"></link>
+	</head>
+	
+	<body ng-controller="AlumnoController">
+		<h1>Cuaderno Alumnos</h1>
+		<div class="wrapper">
+			<div class="alumno" ng-repeat="alumno in alumnos | orderBy: 'nombre'">
+				<div class="name"> {{alumno.nombre}} - {{alumno.telefono}}</div>
+				<span class="curso">{{alumno.curso}} </span>
+			</div>
+		</div>
+		
+		<br>
+		<center><button ng-click="showForm()" ng-hide="formVisibility">Añadir alumno</button></center>
+		<div class="wrapper" ng-show="formVisibility">
+			<h2>Añadir alumno</h2>
+			Nombre: <input type="text" ng-model="nuevoAlumno.nombre"></input>
+			Telefono: <input type="text" ng-model="nuevoAlumno.telefono"></input>
+			Curso: <input type="text" ng-model="nuevoAlumno.curso"></input>
+			<button ng-click="addAlumno()">Agregar</button>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+		<script src="./scripts.min.js"></script>
+  	</body>
+</html>
